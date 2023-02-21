@@ -1,12 +1,13 @@
 from tkinter import *
 from tkinter import ttk
 import random
+from algos.bubble import bubbleSort
 from colors import *
 
-window = Tk()
-window.title("Sorting Algorithms Visualization")
-window.maxsize(1500, 1000)
-window.config(bg = WHITE)
+root = Tk()
+root.title("Sorting Algorithms Visualization")
+root.maxsize(1500, 1000)
+root.config(bg = WHITE)
 
 algorithm_name = StringVar()
 algo_list = ['Bubble Sort', 'Merge Sort']
@@ -15,6 +16,11 @@ speed_name = StringVar()
 speed_list = ['Fast', 'Medium', 'Slow']
 
 data = []
+
+
+def close():
+    root.destroy()
+
 
 
 def drawInfo(data, colorArray):
@@ -33,7 +39,7 @@ def drawInfo(data, colorArray):
         y1 = canvas_height
         canvas.create_rectangle(x0, y0, x1, y1, fill=colorArray[i])
 
-    window.update_idletasks()
+    root.update()
 
 
 def generateArray():
@@ -46,15 +52,25 @@ def generateArray():
 
     drawInfo(data, [RED for x in range(len(data))])
 
+def speed():
+    if speed_menu.get() == 'Slow':
+        return 0.3
+    elif speed_menu.get() == 'Medium':
+        return 0.1
+    else:
+        return 0.0001
+
+
+def sort():
+    global data
+    timeSet = speed()
+
+    if algo_menu.get() == 'Bubble Sort':
+        bubbleSort(data, drawInfo ,timeSet)
 
 
 
-
-
-
-
-
-UI_FRAME = Frame(window, width=900, height=600, bg=WHITE)
+UI_FRAME = Frame(root, width=900, height=600, bg=WHITE)
 UI_FRAME.grid(row=0, column=0, padx=0, pady=0)
 
 l1 = Label(UI_FRAME, text="algo: ", bg=WHITE, fg=BLACK, font=("Arial", 18, "bold"))
@@ -74,19 +90,21 @@ speed_menu.current()
 b1 = Button(UI_FRAME, text="generate new array", command=generateArray, bg=LIGHT_GREEN)
 b1.grid(row=5, column=0, padx=0, pady=0)
 
-b2 = Button(UI_FRAME, text="sort", bg=BLUE)
+b2 = Button(UI_FRAME, text="sort", command=sort, bg=BLUE)
 b2.grid(row=5, column=1, padx=10, pady=10)
 
+b3 = Button(UI_FRAME, text="close", command=close, bg=BLUE)
+b3.grid(row=5, column=2, padx=10, pady=10)
 
-canvas = Canvas(window, width=1300, height=700, bg=WHITE)
+b4 = Button(UI_FRAME, text="stop", command=stop, bg=BLUE)
+b4.grid(row=5, column=3, padx=10, pady=10)
+
+
+canvas = Canvas(root, width=1300, height=700, bg=WHITE)
 canvas.grid(row=1, column=0, padx=50, pady=5)
 
 
 
 
 
-
-
-
-
-window.mainloop()
+root.mainloop()
