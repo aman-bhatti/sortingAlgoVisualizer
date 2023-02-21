@@ -93,11 +93,8 @@ b1.grid(row=5, column=0, padx=0, pady=0)
 b2 = Button(UI_FRAME, text="sort", command=sort, bg=BLUE)
 b2.grid(row=5, column=1, padx=10, pady=10)
 
-b3 = Button(UI_FRAME, text="close", command=close, bg=BLUE)
+b3 = Button(UI_FRAME, text="quit", command=close, bg=BLUE)
 b3.grid(row=5, column=2, padx=10, pady=10)
-
-b4 = Button(UI_FRAME, text="stop", command=stop, bg=BLUE)
-b4.grid(row=5, column=3, padx=10, pady=10)
 
 
 canvas = Canvas(root, width=1300, height=700, bg=WHITE)
