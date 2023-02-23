@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import random
 from algos.bubble import bubbleSort
+from algos.selection import selectionSort
 from colors import *
 
 root = Tk()
@@ -10,7 +11,7 @@ root.maxsize(1500, 1000)
 root.config(bg = WHITE)
 
 algorithm_name = StringVar()
-algo_list = ['Bubble Sort', 'Merge Sort']
+algo_list = ['Bubble Sort', 'Merge Sort', 'Selection Sort']
 
 speed_name = StringVar()
 speed_list = ['Fast', 'Medium', 'Slow']
@@ -50,7 +51,7 @@ def generateArray():
         random_value = random.randint(1, 150)
         data.append(random_value)
 
-    drawInfo(data, [RED for x in range(len(data))])
+    drawInfo(data, [PINK for x in range(len(data))])
 
 def speed():
     if speed_menu.get() == 'Slow':
@@ -67,6 +68,8 @@ def sort():
 
     if algo_menu.get() == 'Bubble Sort':
         bubbleSort(data, drawInfo ,timeSet)
+    if algo_menu.get() == 'Selection Sort':
+        selectionSort(data, drawInfo, timeSet)
 
 
 

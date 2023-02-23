@@ -8,6 +8,6 @@ def bubbleSort(data, drawInfo, timeTick):
             if data[j] > data[j+1]:
                 data[j], data[j+1] = data[j+1], data[j]
                 drawInfo(data, [YELLOW if x == j or x == j+1 else PURPLE for x in range(len(data))] )
-                #time.sleep(timeTick)
+                time.sleep(timeTick)
                 
     drawInfo(data, [BLUE for x in range(len(data))])
