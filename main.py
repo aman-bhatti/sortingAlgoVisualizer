@@ -58,7 +58,7 @@ def speed():
     elif speed_menu.get() == 'Medium':
         return 0.1
     else:
-        return 0.0001
+        return 0.000001
 
 
 def sort():
