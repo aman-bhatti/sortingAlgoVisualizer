@@ -3,6 +3,7 @@ from tkinter import ttk
 import random
 from algos.bubble import bubbleSort
 from algos.selection import selectionSort
+from algos.insertion import insertionSort
 from colors import *
 
 root = Tk()
@@ -11,13 +12,13 @@ root.maxsize(1500, 1000)
 root.config(bg = WHITE)
 
 algorithm_name = StringVar()
-algo_list = ['Bubble Sort', 'Merge Sort', 'Selection Sort']
+algo_list = ['Bubble Sort', 'Selection Sort', 'Insertion Sort']
 
 speed_name = StringVar()
 speed_list = ['Fast', 'Medium', 'Slow']
 
 data = []
-
+stop_flag = False
 
 def close():
     root.destroy()
@@ -61,15 +62,24 @@ def speed():
     else:
         return 0.000001
 
+def stop():
+    global stop_flag
+    stop_flag = True
+
 
 def sort():
     global data
+    global stop_flag
+    stop_flag = False
     timeSet = speed()
+    
 
     if algo_menu.get() == 'Bubble Sort':
-        bubbleSort(data, drawInfo ,timeSet)
+        bubbleSort(data, drawInfo ,timeSet, stop_flag)
     if algo_menu.get() == 'Selection Sort':
         selectionSort(data, drawInfo, timeSet)
+    if algo_menu.get() == 'Insertion Sort':
+        insertionSort(data, drawInfo, timeSet)
 
 
 
@@ -99,6 +109,8 @@ b2.grid(row=5, column=1, padx=10, pady=10)
 b3 = Button(UI_FRAME, text="quit", command=close, bg=BLUE)
 b3.grid(row=5, column=2, padx=10, pady=10)
 
+b4 = Button(UI_FRAME, text="stop", command=stop, bg=RED)
+b4.grid(row=5, column=3, padx=10, pady=10)
 
 canvas = Canvas(root, width=1300, height=700, bg=WHITE)
 canvas.grid(row=1, column=0, padx=50, pady=5)

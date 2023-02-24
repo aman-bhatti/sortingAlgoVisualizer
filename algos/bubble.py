@@ -1,10 +1,11 @@
 import time
 from colors import *
 
-def bubbleSort(data, drawInfo, timeTick):
+def bubbleSort(data, drawInfo, timeTick, stop_flag):
     size = len(data)
     for i in range(size-1):
         for j in range(size-i-1):
+            if stop_flag: return
             if data[j] > data[j+1]:
                 data[j], data[j+1] = data[j+1], data[j]
                 drawInfo(data, [YELLOW if x == j or x == j+1 else PURPLE for x in range(len(data))] )
